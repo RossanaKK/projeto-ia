@@ -30,5 +30,3 @@ export default function Home({ userEmail }: HomeProps) {
     </div>
   );
 }
-
-export default Home;
