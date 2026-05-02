@@ -1,0 +1,26 @@
+/* Cores do modo Claro */
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Cores do modo Escuro */
+.dark-mode {
+  background-color: #212529;
+  color: #ffffff;
+}
+.dark-mode .card, .dark-mode .card-header, .dark-mode .card-footer {
+  background-color: #343a40;
+  color: white;
+  border-color: #495057;
+}
+
+/* Cores do modo Azul */
+.blue-mode {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+.blue-mode .card {
+  background-color: #bbdefb;
+  border-color: #90caf9;
+}
