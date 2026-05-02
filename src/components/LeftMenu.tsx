@@ -28,5 +28,3 @@ export default function LeftMenu() {
     </aside>
   );
 }
-
-export default LeftMenu;
