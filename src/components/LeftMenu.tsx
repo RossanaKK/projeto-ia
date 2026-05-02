@@ -1,48 +1,31 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeContext, Theme, ChatContext } from '../App';
+import { ChatContext, ThemeContext, Theme } from '../App';
 
-function LeftMenu() {
-  const themeContext = useContext(ThemeContext);
+export default function LeftMenu() {
   const { perguntas } = useContext(ChatContext);
+  const { setTheme } = useContext(ThemeContext);
+
   return (
-    <div className="col-3 d-flex flex-column border-end py-3 h-100">    
-      <div>
-        <h6 className="text-muted fw-bold mb-3 px-2">NAVEGAÇÃO</h6>
-        <div className="list-group list-group-flush mb-4">
-          <Link to="/" className="list-group-item list-group-item-action bg-transparent border-0">
-            🏠 Página Inicial
-          </Link>
-          <Link to="/chat" className="list-group-item list-group-item-action bg-transparent border-0">
-            💬 Chat com IA
-          </Link>
-          <Link to="/dashboard" className="list-group-item list-group-item-action bg-transparent border-0">
-            📊 Dashboard Analytics
-          </Link>
-        </div>
-        <h6 className="text-muted fw-bold mb-3 px-2">HISTÓRICO (LOG)</h6>
-        <div className="list-group list-group-flush small overflow-auto" style={{ maxHeight: '40vh' }}>
-          {perguntas.length === 0 ? (
-            <p className="text-muted fst-italic px-3">Sem histórico ainda.</p>
-          ) : (
-            perguntas.map((texto: string, index: number) => (
-              <button key={index} className="list-group-item list-group-item-action bg-transparent text-truncate border-0">
-                {texto}
-              </button>
-            ))
-          )} 
-        </div>
+    <aside className="p-3 border-end d-flex flex-column" style={{ width: '250px' }}>
+      
+      <h5>Menu</h5>
+      <Link to="/chat" className="mb-2 text-decoration-none">💬 Chat</Link>
+      <Link to="/dashboard" className="mb-4 text-decoration-none">📊 Dashboard</Link>
+
+      <h5>Histórico</h5>
+      <div className="overflow-auto mb-3">
+        {perguntas.map((p: string, i: number) => (
+          <p key={i} className="small text-truncate mb-1">{p}</p>
+        ))}
       </div>
-      <div className="mt-auto px-2">
-        <hr className="text-muted" />
-        <p className="text-muted small mb-2 text-center">Tema da Interface</p>
-        <div className="d-flex justify-content-center gap-2">
-          <button onClick={() => themeContext.setTheme(Theme.Light)} className="btn btn-sm btn-outline-secondary" title="Claro">☀️</button>
-          <button onClick={() => themeContext.setTheme(Theme.Dark)} className="btn btn-sm btn-outline-secondary" title="Escuro">🌙</button>
-          <button onClick={() => themeContext.setTheme(Theme.Blue)} className="btn btn-sm btn-outline-primary" title="Azul">🌊</button>
-        </div>
+
+      <div className="mt-auto border-top pt-3">
+        <button onClick={() => setTheme(Theme.Light)} className="btn btn-sm btn-light me-1">Claro</button>
+        <button onClick={() => setTheme(Theme.Dark)} className="btn btn-sm btn-dark">Escuro</button>>
+        <button onClick={() => setTheme(Theme.Blue)} className="btn btn-sm btn-outline-primary">Azul</button>
       </div>
-    </div>
+    </aside>
   );
 }
 
