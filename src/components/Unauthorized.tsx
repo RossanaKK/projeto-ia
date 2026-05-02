@@ -19,5 +19,3 @@ export default function Unauthorized() {
     </div>
   );
 }
-
-export default Unauthorized;
