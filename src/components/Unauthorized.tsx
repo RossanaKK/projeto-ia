@@ -3,20 +3,18 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
-function Unauthorized() {
+export default function Unauthorized() {
   return (
-    <div className="d-flex flex-column flex-grow-1" style={{ minHeight: "100vh" }}>
-      <Header userEmail={null} />
-      <div className="container my-auto text-center flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-        <h1 className="display-1 text-danger fw-bold mb-3">🚫 403</h1>
-        <h2 className="mb-4">Acesso Negado</h2>
-        <p className="lead text-muted mb-5">
-          Ups! Esta área é exclusiva e tens de ter a sessão iniciada para a poder ver.
-        </p>
-        <Link to="/login" className="btn btn-primary btn-lg shadow-sm">
-          Ir para a página de Login
-        </Link>
-      </div>
+    <div className="d-flex flex-column vh-100">
+      <Header />
+      <main className="text-center d-flex flex-column justify-content-center flex-grow-1">
+        <h1 className="text-danger mb-2">🚫 403</h1>
+        <h2 className="mb-3">Acesso Negado</h2>
+        <p className="mb-4">Tens de ter a sessão iniciada para ver esta página.</p>
+        <div>
+          <Link to="/login" className="btn btn-primary">Ir para Login</Link>
+        </div>
+      </main>
       <Footer />
     </div>
   );
