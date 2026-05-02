@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login';
 import ChatScreen from './components/ChatScreen';
 import Dashboard from './components/Dashboard';
