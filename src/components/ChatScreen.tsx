@@ -23,7 +23,7 @@ export default function ChatScreen() {
     setPrompt("");
     setLoading(true);
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const res = await model.generateContent(texto);
       setRespostas((prev: any) => [...prev, res.response.text()]);
     } catch (error: any) {
