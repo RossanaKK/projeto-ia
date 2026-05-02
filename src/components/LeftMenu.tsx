@@ -22,7 +22,7 @@ export default function LeftMenu() {
 
       <div className="mt-auto border-top pt-3">
         <button onClick={() => setTheme(Theme.Light)} className="btn btn-sm btn-light me-1">Claro</button>
-        <button onClick={() => setTheme(Theme.Dark)} className="btn btn-sm btn-dark">Escuro</button>>
+        <button onClick={() => setTheme(Theme.Dark)} className="btn btn-sm btn-dark">Escuro</button>
         <button onClick={() => setTheme(Theme.Blue)} className="btn btn-sm btn-outline-primary">Azul</button>
       </div>
     </aside>
