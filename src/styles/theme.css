@@ -1,10 +1,8 @@
-/* Cores do modo Claro */
 .light-mode {
   background-color: #ffffff;
   color: #000000;
 }
 
-/* Cores do modo Escuro */
 .dark-mode {
   background-color: #212529;
   color: #ffffff;
@@ -15,7 +13,6 @@
   border-color: #495057;
 }
 
-/* Cores do modo Azul */
 .blue-mode {
   background-color: #e3f2fd;
   color: #0d47a1;
