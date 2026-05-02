@@ -5,7 +5,8 @@ import Header from './Header';
 import LeftMenu from './LeftMenu';
 import Footer from './Footer';
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "CHAVE_FALTOU");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyBMij211BtEa7WQFy-gFELmZDrWxq7hL2I");
+console.log("A MINHA CHAVE É:", import.meta.env.VITE_GEMINI_API_KEY);
 
 export default function ChatScreen() {
   const [prompt, setPrompt] = useState("");
