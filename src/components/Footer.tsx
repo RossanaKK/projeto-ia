@@ -4,10 +4,8 @@ function Footer() {
   const ano = new Date().getFullYear();
 
   return (
-    <footer className="text-center py-3 border-top mt-auto" style={{ backgroundColor: 'rgba(0,0,0,0.05)' }}>
-      <small className="text-secondary">
-        &copy; {ano} | Projeto de Design Front-End - Universidade da Madeira
-      </small>
+    <footer className="p-3 text-center bg-light border-top mt-auto">
+      <small>&copy; {ano} | Projeto IA</small>
     </footer>
   );
 }
