@@ -1,14 +1,12 @@
 import { useState, useEffect, createContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { auth } from "./config/firebase"; 
-import Login from './components/Login'; 
+import { auth } from "./config/firebase";
+import Login from './components/Login';
 import ChatScreen from './components/ChatScreen';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Unauthorized from './components/Unauthorized';
-import './styles/theme.css'; 
 
 export enum Theme {
   Light = 'light-mode',
@@ -18,7 +16,7 @@ export enum Theme {
 export const ThemeContext = createContext<any>(null);
 export const ChatContext = createContext<any>(null);
 
-function App() {
+export default function App() {
   const [user, setUser] = useState<any>(null);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [theme, setTheme] = useState<Theme>(Theme.Light);
@@ -27,29 +25,27 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setIsAuthChecking(false); 
+      setIsAuthChecking(false);
     });
     return () => unsubscribe();
   }, []);
-  if (isAuthChecking) return <p className="text-center mt-5">A verificar sessão...</p>;
-  if (!user) return <Navigate to="/login" />;
+  if (isAuthChecking) return <div className="text-center mt-5">A verificar sessão...</div>;
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <ChatContext.Provider value={{ perguntas, setPerguntas, respostas, setRespostas }}>    
-        <div className={`${theme} d-flex flex-column`} style={{ minHeight: '100vh' }}>
+      <ChatContext.Provider value={{ perguntas, setPerguntas, respostas, setRespostas }}>
+        <div className={`${theme} d-flex flex-column`} style={{ minHeight: '100vh' }}>      
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home />} />
+              {/* Passamos o userEmail para a Home exatamente como tinhas antes */}
+              <Route path="/" element={<Home userEmail={user?.email || null} />} />
               <Route path="/login" element={user ? <Navigate to="/chat" /> : <Login />} />
               <Route path="/chat" element={!user ? <Unauthorized /> : <ChatScreen />} />
               <Route path="/dashboard" element={!user ? <Unauthorized /> : <Dashboard />} />
             </Routes>
           </BrowserRouter>
-        </div>
 
+        </div>
       </ChatContext.Provider>
     </ThemeContext.Provider>
   );
 }
-
-export default App;
