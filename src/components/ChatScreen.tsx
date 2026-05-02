@@ -5,13 +5,13 @@ import Header from './Header';
 import LeftMenu from './LeftMenu';
 import Footer from './Footer';
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "TUA_CHAVE");
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyBMij211BtEa7WQFy-gFELmZDrWxq7hL2I");
 
 export default function ChatScreen() {
   const [prompt, setPrompt] = useState("");
-  const [loading, setLoading] = useState(false); // A LÓGICA DE LOADING ESTÁ DE VOLTA 
+  const [loading, setLoading] = useState(false);
   const { perguntas, setPerguntas, respostas, setRespostas } = useContext(ChatContext);
-  const fimRef = useRef<HTMLDivElement>(null); // O REF ESTÁ DE VOLTA
+  const fimRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     fimRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [respostas]);
