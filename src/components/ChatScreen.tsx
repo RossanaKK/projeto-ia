@@ -6,7 +6,6 @@ import LeftMenu from './LeftMenu';
 import Footer from './Footer';
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyBMij211BtEa7WQFy-gFELmZDrWxq7hL2I");
-console.log("A MINHA CHAVE É:", import.meta.env.VITE_GEMINI_API_KEY);
 
 export default function ChatScreen() {
   const [prompt, setPrompt] = useState("");
@@ -24,11 +23,10 @@ export default function ChatScreen() {
     setPrompt("");
     setLoading(true);
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
       const res = await model.generateContent(texto);
       setRespostas((prev: any) => [...prev, res.response.text()]);
     } catch (error: any) {
-      // AQUI ESTÁ O TRUQUE: O erro exato da Google vai aparecer no teu ecrã!
       console.error("Erro detalhado da API:", error);
       setRespostas((prev: any) => [...prev, `Erro na API: ${error.message || "Verifica a consola."}`]);
     } finally {
