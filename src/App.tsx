@@ -4,7 +4,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/theme.css'; 
-
 import Login from './components/Login';
 import ChatScreen from './components/ChatScreen';
 import Dashboard from './components/Dashboard';

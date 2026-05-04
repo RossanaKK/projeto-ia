@@ -1,7 +1,7 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importação para navegação
-import { onAuthStateChanged } from 'firebase/auth'; // Importação do Firebase
-import { auth } from '../config/firebase'; // O teu ficheiro de configuração
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../config/firebase';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { ChatContext } from '../App';
 import Header from './Header';
