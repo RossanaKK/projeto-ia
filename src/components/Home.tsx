@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -13,6 +12,7 @@ export default function Home({ userEmail }: HomeProps) {
       <Header userEmail={userEmail} />
       <main className="text-center d-flex flex-column justify-content-center flex-grow-1">
         <h1 className="mb-4">A Tua Plataforma IA</h1>
+        
         {userEmail ? (
           <div>
             <p className="mb-4">Sessão iniciada como: <b>{userEmail}</b></p>

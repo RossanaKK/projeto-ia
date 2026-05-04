@@ -1,17 +1,34 @@
 import { useState, useContext, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importação para navegação
+import { onAuthStateChanged } from 'firebase/auth'; // Importação do Firebase
+import { auth } from '../config/firebase'; // O teu ficheiro de configuração
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { ChatContext } from '../App';
 import Header from './Header';
 import LeftMenu from './LeftMenu';
 import Footer from './Footer';
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 
 export default function ChatScreen() {
+  const navigate = useNavigate();
+  const [isChecking, setIsChecking] = useState(true); 
+
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false); 
   const { perguntas, setPerguntas, respostas, setRespostas } = useContext(ChatContext);
   const fimRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate('/unauthorized');
+      } else {
+        setIsChecking(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
   useEffect(() => {
     fimRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [respostas]);
@@ -33,12 +50,20 @@ export default function ChatScreen() {
       setLoading(false);
     }
   };
+  if (isChecking) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <div className="spinner-border text-primary" />
+      </div>
+    );
+  }
+
   return (
     <div className="d-flex flex-column vh-100">
       <Header />
       <div className="container-fluid flex-grow-1 overflow-hidden d-flex p-0">
         <div className="row g-0 w-100">
-          <div className="col-12 col-md-3 col-lg-2 border-end bg-dark text-light p-3 d-flex flex-column h-100">
+          <div className="col-12 col-md-3 col-lg-2 border-end p-3 d-flex flex-column h-100">
             <LeftMenu />
           </div>
           <main className="col-12 col-md-9 col-lg-10 p-4 d-flex flex-column h-100">

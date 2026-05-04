@@ -1,13 +1,7 @@
-import React from 'react';
-
-function Footer() {
-  const ano = new Date().getFullYear();
-
+export default function Footer() {
   return (
-    <footer className="p-3 text-center bg-light border-top mt-auto">
-      <small>&copy; {ano} | Projeto IA</small>
+    <footer className="text-center p-3 border-top small opacity-75" style={{ backgroundColor: 'inherit' }}>
+      &copy; 2026 | Projeto IA
     </footer>
   );
 }
-
-export default Footer;

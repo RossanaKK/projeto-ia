@@ -19,8 +19,8 @@ export default function Header() {
     }
   };
   return (
-    <header className="d-flex justify-content-between p-3 bg-light border-bottom">
-      <h3 className="m-0 text-dark">HOME / DASH</h3>
+    <header className="d-flex justify-content-between p-3 border-bottom">
+      <h3 className="m-0">HOME / DASH</h3>
       {user && (
         <div>
           <span className="me-3 text-secondary">{user.email}</span>

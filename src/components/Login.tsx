@@ -18,8 +18,8 @@ export default function Login() {
     }
   };
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-dark">
-      <form onSubmit={handleLogin} className="p-4 border bg-light shadow-sm rounded">
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <form onSubmit={handleLogin} className="p-4 border shadow-sm rounded">
         <h4 className="mb-3">Entrar</h4>
         <input 
           type="email" 
