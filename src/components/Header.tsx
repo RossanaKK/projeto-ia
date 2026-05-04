@@ -1,32 +1,38 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from "firebase/auth";
-import { auth } from "../config/firebase";
-import { ChatContext } from '../App'; // Importamos o contexto
+import { signOut } from 'firebase/auth';
+import { auth } from '../config/firebase';
 
-export default function Header() {
+export default function Header({ userEmail }: { userEmail: string | null }) {
   const navigate = useNavigate();
-  const user = auth.currentUser;
-  const { setPerguntas, setRespostas } = useContext(ChatContext);
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setPerguntas([]); 
-      setRespostas(["Olá! Como posso ajudar hoje?"]);     
-      navigate('/login', { replace: true });
+      navigate('/');
     } catch (error) {
       console.error("Erro ao sair:", error);
     }
   };
+
   return (
-    <header className="d-flex justify-content-between p-3 border-bottom">
-      <h3 className="m-0">HOME / DASH</h3>
-      {user && (
-        <div>
-          <span className="me-3 text-secondary">{user.email}</span>
-          <button onClick={handleLogout} className="btn btn-danger btn-sm">Sair</button>
+    <header className="navbar border-bottom shadow-sm p-3">
+      <div className="container-fluid">
+        <span className="navbar-brand mb-0 h1">Plataforma IA</span>
+        
+        <div className="d-flex align-items-center gap-3">
+          {userEmail && (
+            <>
+              <span className="small text-muted">{userEmail}</span>
+              <button 
+                onClick={handleLogout} 
+                className="btn btn-danger btn-sm"
+              >
+                Sair
+              </button>
+            </>
+          )}
         </div>
-      )}
+      </div>
     </header>
   );
 }
