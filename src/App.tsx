@@ -24,8 +24,9 @@ export default function App() {
   const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [theme, setTheme] = useState<Theme>(Theme.Light);
   const [perguntas, setPerguntas] = useState<string[]>([]);
-  const [respostas, setRespostas] = useState<string[]>(["Olá! Como posso ajudar hoje?"]);
-
+  const [respostas, setRespostas] = useState<string[]>([]);
+  const [totalPedidos, setTotalPedidos] = useState(0);
+  const [tempoTotal, setTempoTotal] = useState(0);  // --------------------------------------
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -33,16 +34,15 @@ export default function App() {
     });
     return () => unsubscribe();
   }, []);
-
   if (isAuthChecking) return null; 
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <ChatContext.Provider value={{ perguntas, setPerguntas, respostas, setRespostas }}>
+      <ChatContext.Provider value={{ perguntas, setPerguntas, respostas, setRespostas, totalPedidos, setTotalPedidos, tempoTotal, setTempoTotal }}>
         <div className={`${theme} min-vh-100 d-flex flex-column`}>      
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home userEmail={user?.email || null} />} />           
+              <Route path="/" element={<Home userEmail={user?.email || null} />} />          
               <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
               <Route path="/chat" element={!user ? <Unauthorized /> : <ChatScreen />} />
               <Route path="/dashboard" element={!user ? <Unauthorized /> : <Dashboard />} />
