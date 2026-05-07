@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import Header from './Header';
 import LeftMenu from './LeftMenu';
 import Footer from './Footer';
-import { auth } from '../config/firebase'; // Apenas para passar o email ao Header
+import { auth } from '../config/firebase';
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
