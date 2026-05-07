@@ -1,38 +1,42 @@
 # Projeto: Plataforma IA - Chatbot Integrado
 
-Este projeto consiste numa interface de chat desenvolvida em React, integrada com a API do Google Gemini, criada no âmbito do CTeSP de Tecnologias e Programação de Sistemas de Informação (TPSI) da Universidade da Madeira, para Desenvolvimento Web - Front-End.
+Este projeto consiste numa interface de chat desenvolvida em React, integrada com a API do Google Gemini, criada no âmbito do CTeSP de Tecnologias e Programação de Sistemas de Informação (TPSI) da Universidade da Madeira, para a disciplina de Desenvolvimento Web - Front-End.
 
 ---
 
-
 ## 🛠️ Tecnologias Utilizadas
 * **React (com Vite):** Framework principal para a construção da interface de utilizador.
-* **TypeScript:** Utilizado para garantir a tipagem estática e maior robustez do código.
+* **TypeScript:** Garantia de tipagem estática e robustez do código.
 * **Google Generative AI SDK:** Integração com o modelo `gemini-2.5-flash` para processamento de linguagem natural.
-* **Firebase Authentication:** Proteção de rotas, garantindo que o chat apenas é acessível a utilizadores autenticados.
-* **Bootstrap:** Estilização, layout flexível (Flexbox) e responsividade.
-* **React Context API:** Gestão de estado global (perguntas, respostas e temas).
+* **Firebase Authentication:** Proteção de rotas e gestão de utilizadores.
+* **Bootstrap:** Estilização responsiva e componentes UI.
+* **Recharts:** Biblioteca de gráficos utilizada para o Dashboard de estatísticas.
+* **React Context API:** Gestão de estado global (perguntas, respostas, temas e métricas).
 
 ---
 
 ## 🧠 Arquitetura e Decisões Técnicas
 
-Durante o desenvolvimento, foram tomadas decisões arquiteturais focadas na robustez, na experiência do utilizador (UX) e no rigor das metodologias lecionadas em aula:
+Durante o desenvolvimento, foram tomadas decisões focadas na robustez do sistema e no cumprimento dos requisitos do enunciado:
 
-**1. Sincronização de Estado (O problema das listas assimétricas):**
-Em vez de utilizar uma única estrutura de objetos complexos, manteve-se a abordagem baseada em duas listas (arrays) geridas pelo Contexto (`perguntas` e `respostas`). Para evitar erros de índice (quando a IA demora a responder), implementou-se a inserção de uma resposta temporária (*"A pensar..."*). Isto garante que as listas têm sempre o mesmo comprimento, sendo a resposta temporária posteriormente atualizada com o texto final da IA.
+**1. Sincronização de Estado e UX:**
+Manteve-se o alinhamento entre os arrays de `perguntas` e `respostas`. Para melhorar a experiência do utilizador, implementou-se uma resposta temporária (*"A pensar..."*). Isto garante que o utilizador tem feedback imediato e que as listas mantêm o mesmo comprimento para a renderização via `.map()`.
 
-**2. Renderização Condicional e UX:**
-A mensagem inicial de boas-vindas foi configurada para desaparecer dinamicamente assim que o array de perguntas deixa de estar vazio (`perguntas.length === 0`). Para a estrutura do chat, utilizou-se o método de iteração nativo do React (`.map()`), alinhando as mensagens do utilizador à direita e as da IA à esquerda através de classes do Bootstrap (`justify-content-end` e `justify-content-start`).
+**2. Navegação SPA (Single Page Application):**
+Para evitar a perda de dados armazenados no Contexto (como o histórico e as métricas), substituiu-se o uso de tags `<a>` pelo componente `<Link>` do `react-router-dom`. Isto garante uma navegação instantânea sem *refresh* da página, mantendo o estado da aplicação "vivo".
 
-**3. Tratamento de Erros e Limites de API (Rate Limiting):**
-Sendo a API do Gemini (Free Tier) suscetível a picos de tráfego, o uso crucleal de blocos `try...catch` foi reforçado com a interceção de erros HTTP 503 e 429 ("High Demand"). Em vez de a aplicação falhar (crash), o utilizador recebe uma notificação visual (na própria interface de chat) a pedir para aguardar, mantendo a estabilidade do sistema.
+**3. Dashboard e Monitorização (Recharts):**
+Implementou-se uma página de Dashboard que consome dados globais do contexto. Utilizou-se a biblioteca **Recharts** para desenhar um gráfico de barras responsivo que compara o número de pedidos com o tempo médio de resposta.
 
-**4. Segurança das Credenciais:**
-A chave da API da Google foi isolada num ficheiro `.env` e acedida via `import.meta.env.VITE_GEMINI_API_KEY`. Isto garante que as credenciais não ficam expostas no código-fonte em repositórios públicos.
+**4. Medição de Performance:**
+O sistema calcula o tempo de carregamento da API utilizando `Date.now()` antes e depois da chamada assíncrona. O cálculo é feito dentro de um bloco `finally` para garantir que, mesmo em caso de erro da API (High Demand), o pedido e o tempo gasto sejam contabilizados nas estatísticas.
 
-**5. Comportamento do Modelo e Ausência de Estado (Statelessness):**
-A comunicação atual com a API através do método `generateContent` opera de forma "stateless", ou seja, não retém memória do histórico da conversa. Cada envio é processado como um pedido isolado (amnésia de contexto), o que explica a repetição ocasional de saudações por parte da IA. Adicionalmente, como o modelo não tem acesso à internet em tempo real para dados dinâmicos (como meteorologia exata), foi observado que a IA utiliza mecanismos de *fallback* (respostas genéricas de preenchimento) ou baseia-se em dados históricos de treino (alucinação leve) para colmatar a ausência de informação imediata. Esta é uma característica inerente ao funcionamento atual dos LLMs (Large Language Models) nesta configuração simples.
+**5. Tratamento de Erros:**
+Reforço com blocos `try...catch` para gerir erros HTTP 503 e 429 da API Gemini, informando o utilizador através de mensagens amigáveis na interface em vez de falhas silenciosas.
+
+**6. Segurança e Statelessness:**
+- Uso de ficheiros `.env` para proteção da API Key.
+- Reconhecimento da natureza *stateless* do método `generateContent`, justificando a ausência de memória entre pedidos isolados e a ocorrência de respostas genéricas (*fallbacks*).
 
 ---
 
@@ -41,7 +45,7 @@ A comunicação atual com a API através do método `generateContent` opera de f
 1. Clonar o repositório.
 2. Criar um ficheiro `.env` na raiz do projeto e adicionar a chave da API:
    `VITE_GEMINI_API_KEY=sua_chave_aqui`
-3. Instalar as dependências:
+3. Instalar as dependências (incluindo Recharts):
    `npm install`
 4. Iniciar o servidor de desenvolvimento:
    `npm run dev`
