@@ -38,6 +38,9 @@ Reforço com blocos `try...catch` para gerir erros HTTP 503 e 429 da API Gemini,
 - Uso de ficheiros `.env` para proteção da API Key.
 - Reconhecimento da natureza *stateless* do método `generateContent`, justificando a ausência de memória entre pedidos isolados e a ocorrência de respostas genéricas (*fallbacks*).
 
+**7. Otimização e "Clean Code":**
+Na fase final de desenvolvimento, o código dos componentes foi alvo de refatorização para aplicar princípios de *Clean Code* (como o DRY - *Don't Repeat Yourself*). Foram eliminadas redundâncias, como a remoção de verificações duplas de autenticação no componente de chat (uma vez que a proteção já é garantida pelo Router no `App.tsx`), e adotou-se o *Destructuring* de objetos para o consumo da Context API. Estas otimizações reduziram significativamente a complexidade visual e o número de linhas de código, tornando a aplicação mais leve e fácil de manter.
+
 ---
 
 ## 🚀 Como Executar o Projeto

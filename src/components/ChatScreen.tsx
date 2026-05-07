@@ -1,46 +1,26 @@
-import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../config/firebase';
-import { ChatContext, ThemeContext } from '../App';
+import { useState, useContext } from 'react';
+import { ChatContext } from '../App';
 import { GoogleGenerativeAI } from "@google/generative-ai"; 
 import Header from './Header';
 import LeftMenu from './LeftMenu';
 import Footer from './Footer';
+import { auth } from '../config/firebase'; // Apenas para passar o email ao Header
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export default function ChatScreen() {
-  const navigate = useNavigate();
-  const [isChecking, setIsChecking] = useState(true);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const context = useContext(ChatContext);
-  const perguntas: string[] = context?.perguntas || [];
-  const setPerguntas = context?.setPerguntas;
-  const respostas: string[] = context?.respostas || [];
-  const setRespostas = context?.setRespostas;
-  const setTotalPedidos = context?.setTotalPedidos;
-  const setTempoTotal = context?.setTempoTotal;
-  const { theme } = useContext(ThemeContext);
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) setIsChecking(false);
-      else navigate('/unauthorized');
-    });
-    return () => unsubscribe();
-  }, [navigate]);
+  const { perguntas = [], setPerguntas, respostas = [], setRespostas, setTotalPedidos, setTempoTotal } = useContext(ChatContext) || {};
   const handleEnviar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading || !setPerguntas || !setRespostas) return;
     const userQuery = input;
     setInput('');
     setLoading(true);
-    const novasPerguntas = [...perguntas, userQuery];
-    const novasRespostas = [...respostas, "A pensar..."];    
-    setPerguntas(novasPerguntas);
-    setRespostas(novasRespostas);
+    setPerguntas([...perguntas, userQuery]);
+    setRespostas([...respostas, "A pensar..."]);
     const tempoInicio = Date.now(); 
     try {
       const result = await model.generateContent(userQuery);
@@ -49,9 +29,9 @@ export default function ChatScreen() {
         const listaAtualizada = [...prev];
         listaAtualizada[listaAtualizada.length - 1] = text;
         return listaAtualizada;
-      });     
+      });      
     } catch (error: any) {
-      console.error("Erro na API:", error);      
+      console.error("Erro na API:", error);
       let erroMsg = "Erro: Não foi possível obter resposta da IA.";
       if (error.toString().toLowerCase().includes("high demand") || error.toString().toLowerCase().includes("503") || error.toString().toLowerCase().includes("429")) {
         erroMsg = "A IA está com muita procura. Aguarda uns segundos e tenta de novo.";
@@ -62,39 +42,33 @@ export default function ChatScreen() {
         return listaAtualizada;
       });
     } finally {
-      const tempoFim = Date.now(); 
-      const tempoDecorrido = tempoFim - tempoInicio;
+      const tempoDecorrido = Date.now() - tempoInicio;
       if (setTotalPedidos) setTotalPedidos((prev: number) => prev + 1);
       if (setTempoTotal) setTempoTotal((prev: number) => prev + tempoDecorrido);
       setLoading(false);
     }
   };
-  if (isChecking) return null;
   return (
     <div className="d-flex flex-column vh-100">
       <Header userEmail={auth.currentUser?.email || null} />      
       <div className="d-flex flex-grow-1 overflow-hidden">
-        <LeftMenu />
+        <LeftMenu />       
         <main className="d-flex flex-column flex-grow-1 p-3">
           <h3 className="mb-3">Chat IA</h3>
           <div className="flex-grow-1 overflow-auto border rounded p-3 mb-3 shadow-sm bg-transparent">            
-            <div className="d-flex justify-content-start mb-4">
-              <div className="p-3 rounded-3 shadow-sm border" 
-                   style={{ maxWidth: '75%', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
-                <small className="d-block fw-bold mb-1 text-secondary">IA</small>
-                Olá! Como posso ajudar hoje?
+            {perguntas.length === 0 && (
+              <div className="d-flex justify-content-start mb-4">
+                <div className="p-3 rounded-3 shadow-sm border" style={{ maxWidth: '75%', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+                  <small className="d-block fw-bold mb-1 text-secondary">IA</small>
+                  Olá! Como posso ajudar hoje?
+                </div>
               </div>
-            </div>
+            )}
             {perguntas.map((pergunta: string, index: number) => (
               <div key={`chat-group-${index}`} className="d-flex flex-column">               
                 <div className="d-flex justify-content-end mb-3">
                   <div className="p-3 rounded-3 shadow-sm border border-secondary" 
-                       style={{ 
-                         maxWidth: '75%', 
-                         whiteSpace: 'pre-wrap', 
-                         textAlign: 'right',
-                         backgroundColor: 'rgba(255, 255, 255, 0.05)'
-                       }}>
+                       style={{ maxWidth: '75%', whiteSpace: 'pre-wrap', textAlign: 'right', backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
                     {pergunta}
                   </div>
                 </div>
@@ -107,7 +81,6 @@ export default function ChatScreen() {
                     </div>
                   </div>
                 )}
-
               </div>
             ))}
           </div>
@@ -126,7 +99,6 @@ export default function ChatScreen() {
           </form>
         </main>
       </div>
-
       <Footer />
     </div>
   );
