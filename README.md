@@ -70,9 +70,9 @@ A aplicação faz um uso extensivo e estratégico de React Hooks para garantir c
 
 ---
 
-## 🔐 Credenciais de Teste (Para Avaliação)
+## 🔐 Credenciais de Teste
 
-Para facilitar a navegação e a avaliação deste projeto sem a necessidade de efetuar um novo registo, embora seja possível fazê-lo, foram previamente configuradas contas de demonstração. É possível utilizar qualquer uma das seguintes credenciais de acesso:
+Para facilitar a navegação, foram previamente configuradas contas de demonstração, apesar também poder criar um novo registo. É possível utilizar qualquer uma das seguintes credenciais de acesso:
 
 **Utilizador de Teste 1:**
 * **Email:** teste@gmail.com
@@ -96,7 +96,7 @@ Para facilitar a navegação e a avaliação deste projeto sem a necessidade de 
 
 ---
 
-## 🚀 Como Executar o Projeto (Para Programadores)
+## 🚀 Como Executar o Projeto
 
 1. Clonar o repositório.
 2. Criar um ficheiro `.env` na raiz do projeto e adicionar a chave da API:
