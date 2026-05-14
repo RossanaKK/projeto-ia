@@ -70,6 +70,22 @@ A aplicação faz um uso extensivo e estratégico de React Hooks para garantir c
 
 ---
 
+## 🔐 Credenciais de Teste (Para Avaliação)
+
+Para facilitar a navegação e a avaliação deste projeto sem a necessidade de efetuar um novo registo, embora seja possível fazê-lo, foram previamente configuradas contas de demonstração. É possível utilizar qualquer uma das seguintes credenciais de acesso:
+
+**Utilizador de Teste 1:**
+* **Email:** teste@gmail.com
+* **Password:** 123456789
+
+**Utilizador de Teste 2:**
+* **Email:** teste1@gmail.com
+* **Password:** 123456789
+
+*(Nota: Ambas as contas têm acesso total ao Chat e ao Dashboard de estatísticas).*
+
+---
+
 ## 📖 Guia de Utilização (Como usar a aplicação)
 
 1. **Acesso:** Ao abrir a aplicação, o utilizador deve efetuar a autenticação via Firebase (Login). Utilizadores não autenticados são redirecionados para fora da área de chat.
