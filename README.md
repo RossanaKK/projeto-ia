@@ -1,108 +1,108 @@
 # projeto-ia
 
-A modern AI project built with TypeScript, JavaScript, CSS, and HTML.
+Um moderno projeto de IA construído com TypeScript, JavaScript, CSS e HTML.
 
-## 📋 Overview
+## 📋 Visão Geral
 
-This project is a TypeScript-based application that integrates AI capabilities with web technologies. It combines a strong backend/logic layer (TypeScript) with frontend components (JavaScript, CSS, HTML) for a comprehensive solution.
+Este projeto é uma aplicação baseada em TypeScript que integra capacidades de IA com tecnologias web. Combina uma camada forte de backend/lógica (TypeScript) com componentes frontend (JavaScript, CSS, HTML) para uma solução abrangente.
 
-## 🛠️ Technology Stack
+## 🛠️ Pilha Tecnológica
 
-- **TypeScript** (88.5%) - Primary language for type-safe development
-- **JavaScript** (5.3%) - Additional scripting and utility functions
-- **CSS** (4.6%) - Styling and layout
-- **HTML** (1.6%) - Markup and structure
+- **TypeScript** (88,5%) - Linguagem principal para desenvolvimento type-safe
+- **JavaScript** (5,3%) - Scripts adicionais e funções utilitárias
+- **CSS** (4,6%) - Estilização e layout
+- **HTML** (1,6%) - Marcação e estrutura
 
-## 🚀 Getting Started
+## 🚀 Começar
 
-### Prerequisites
+### Pré-requisitos
 
-Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (recommended version 16 or higher)
-- npm or yarn package manager
-- A modern web browser
+Antes de começar, certifique-se de que tem o seguinte instalado:
+- [Node.js](https://nodejs.org/) (versão recomendada 16 ou superior)
+- npm ou yarn package manager
+- Um navegador web moderno
 
-### Installation
+### Instalação
 
-1. Clone the repository:
+1. Clone o repositório:
 ```bash
 git clone https://github.com/RossanaKK/projeto-ia.git
 cd projeto-ia
 ```
 
-2. Install dependencies:
+2. Instale as dependências:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+3. Inicie o servidor de desenvolvimento:
 ```bash
 npm start
 ```
 
-4. Open your browser and navigate to `http://localhost:3000` (or the configured port)
+4. Abra seu navegador e navegue para `http://localhost:3000` (ou a porta configurada)
 
-## 📁 Project Structure
+## 📁 Estrutura do Projeto
 
 ```
 projeto-ia/
-├── src/              # Source code
-│   ├── components/   # Reusable components
-│   ├── pages/        # Page components
-│   ├── styles/       # CSS files
-│   └── index.ts      # Entry point
-├── public/           # Static files
-├── dist/             # Build output
-├── package.json      # Project dependencies
-├── tsconfig.json     # TypeScript configuration
-└── README.md         # This file
+├── src/              # Código fonte
+│   ├── components/   # Componentes reutilizáveis
+│   ├── pages/        # Componentes de página
+│   ├── styles/       # Ficheiros CSS
+│   └── index.ts      # Ponto de entrada
+├── public/           # Ficheiros estáticos
+├── dist/             # Saída da compilação
+├── package.json      # Dependências do projeto
+├── tsconfig.json     # Configuração TypeScript
+└── README.md         # Este ficheiro
 ```
 
-## 📝 Available Scripts
+## 📝 Scripts Disponíveis
 
-- `npm start` - Runs the application in development mode
-- `npm build` - Builds the application for production
-- `npm test` - Runs the test suite
-- `npm lint` - Runs linting checks
+- `npm start` - Executa a aplicação em modo de desenvolvimento
+- `npm build` - Compila a aplicação para produção
+- `npm test` - Executa a suite de testes
+- `npm lint` - Executa verificações de linting
 
-## 🎯 Features
+## 🎯 Funcionalidades
 
-- Type-safe TypeScript codebase
-- Modern web technologies
-- AI-powered functionality
-- Responsive design with CSS
-- Interactive user interface
+- Codebase TypeScript type-safe
+- Tecnologias web modernas
+- Funcionalidade alimentada por IA
+- Design responsivo com CSS
+- Interface de utilizador interativa
 
-## 🤝 Contributing
+## 🤝 Contribuindo
 
-Contributions are welcome! Here's how you can help:
+Contribuições são bem-vindas! Eis como pode ajudar:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Faça um fork do repositório
+2. Crie um branch de funcionalidade (`git checkout -b feature/NovaFuncionalidade`)
+3. Faça commit das suas alterações (`git commit -m 'Adicionar NovaFuncionalidade'`)
+4. Faça push para o branch (`git push origin feature/NovaFuncionalidade`)
+5. Abra um Pull Request
 
-## 📄 License
+## 📄 Licença
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Este projeto está licenciado sob a Licença MIT - consulte o ficheiro LICENSE para mais detalhes.
 
-## 👤 Author
+## 👤 Autor
 
 **RossanaKK**
 
 - GitHub: [@RossanaKK](https://github.com/RossanaKK)
 
-## 📞 Support
+## 📞 Suporte
 
-If you encounter any issues or have questions, please open an issue on the [GitHub Issues](https://github.com/RossanaKK/projeto-ia/issues) page.
+Se encontrar algum problema ou tiver dúvidas, abra uma issue na página [GitHub Issues](https://github.com/RossanaKK/projeto-ia/issues).
 
-## 🙏 Acknowledgments
+## 🙏 Agradecimentos
 
-- Special thanks to all contributors
-- Inspired by modern web development practices
-- Built with care and attention to detail
+- Agradecimentos especiais a todos os contribuidores
+- Inspirado por práticas modernas de desenvolvimento web
+- Construído com cuidado e atenção aos detalhes
 
 ---
 
-**Last Updated:** May 2026
+**Última Atualização:** Maio 2026
