@@ -105,3 +105,5 @@ Para facilitar a navegação, foram previamente configuradas contas de demonstra
    `npm install`
 4. Iniciar o servidor de desenvolvimento local:
    `npm run dev`
+
+---
